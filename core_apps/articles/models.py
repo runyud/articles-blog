@@ -5,6 +5,7 @@ from django.utils.translation import gettext_lazy as _
 from taggit.managers import TaggableManager
 
 from core_apps.common.models import TimeStampedModel
+
 from .read_time_engine import ArticleReadTimeEngine
 
 User = get_user_model()
@@ -72,7 +73,8 @@ class ArticleView(TimeStampedModel):
         unique_together = ("article", "user", "viewer_ip")
 
     def __str__(self):
-        return f"{self.article.title} viewed by {self.user.first_name if self.user else 'Anonymous'} from IP {self.viewer_ip}"
+        return f"{self.article.title} viewed by {self.user.first_name if self.user else 'Anonymous'} \
+            from IP {self.viewer_ip}"
 
     @classmethod
     def record_view(cls, article, user, viewer_ip):

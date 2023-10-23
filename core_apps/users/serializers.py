@@ -1,11 +1,10 @@
-from dj_rest_auth.registration.serializers import RegisterSerializer
-
 from allauth.account.adapter import get_adapter
 from allauth.account.utils import setup_user_email
-from rest_framework import serializers
+from dj_rest_auth.registration.serializers import RegisterSerializer
 from django.contrib.auth import get_user_model
 from django_countries.serializer_fields import CountryField
 from phonenumber_field.serializerfields import PhoneNumberField
+from rest_framework import serializers
 
 User = get_user_model()
 
@@ -36,7 +35,8 @@ class UserSerializer(serializers.ModelSerializer):
         if instance.is_superuser:
             representation["admin"] = True
         return representation
-    
+
+
 class CustomRegisterSerializer(RegisterSerializer):
     username = None
     first_name = serializers.CharField(required=True)
@@ -53,7 +53,7 @@ class CustomRegisterSerializer(RegisterSerializer):
             "last_name": self.validated_data.get("last_name", ""),
             "password1": self.validated_data.get("password1", ""),
         }
-    
+
     def save(self, request):
         adapter = get_adapter()
         user = adapter.new_user(request)

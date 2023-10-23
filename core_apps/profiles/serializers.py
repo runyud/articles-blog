@@ -1,5 +1,6 @@
 from django_countries.serializer_fields import CountryField
 from rest_framework import serializers
+
 from .models import Profile
 
 
@@ -32,10 +33,11 @@ class ProfileSerializer(serializers.ModelSerializer):
         first_name = obj.user.first_name.title()
         last_name = obj.user.last_name.title()
         return f"{first_name} {last_name}"
-    
+
     def get_profile_photo(self, obj):
         return obj.profile_photo.url
-    
+
+
 class UpdateProfileSerializer(serializers.ModelSerializer):
     country = CountryField(name_only=True)
 
