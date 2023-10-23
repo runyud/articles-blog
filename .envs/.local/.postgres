@@ -3,3 +3,4 @@ POSTGRES_PORT=5432
 POSTGRES_DB=articles-blog
 POSTGRES_USER=runyuding
 POSTGRES_PASSWORD=Pass123456
+DATABSE_URL=postgres://runyuding:Pass123456@postgres:5432/articles-blog
